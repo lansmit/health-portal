@@ -8,7 +8,6 @@
 - [Запуск из терминала](#команды-для-запуска-из-терминала)
 - [Allure отчет](#allure-отчет)
 - [Уведомление в Telegram при помощи бота](#уведомление-в-telegram-при-помощи-бота)
-- [Пример видео выполнения теста на Selenoid](#пример-видео-выполнения-теста-на-selenoid)
 ---
 ### Технологии и инструменты:
 
@@ -35,6 +34,8 @@
 
 ---
 ### ![Jenkins](https://img.icons8.com/?size=30&id=39292&format=png&color=000000) Сборка в [Jenkins](https://jenkins.autotests.cloud/job/C35-lansm_t-Unit14-test_build_for_healthcompany/)
+
+![](src/test/resources/images/jenkins.jpg)
 
 ---
 ### Параметры сборки в Jenkins:
