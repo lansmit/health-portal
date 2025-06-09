@@ -1,0 +1,16 @@
+{
+  "base": {
+    "project": "Тестовая сборка smoke-тестов для портала СберЗдоровье",
+    "reportLink": "https://jenkins.autotests.cloud/job/C35-lansm_t-Unit14-test_build_for_sberhealth-notifications/",
+    "language": "en",
+    "allureFolder": "allure-report/",
+    "enableChart": true,
+    "durationFormat": "HH:mm:ss.SSS"
+  },
+  "telegram": {
+    "token": "7697417123:AAEzh-V2aWI8-_3aMfXLSgd694DvgqghW4I",
+    "chat": "-1002630440647",
+    "replyTo": ""
+  }
+
+}
