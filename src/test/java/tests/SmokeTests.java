@@ -1,152 +1,80 @@
 package tests;
 
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.logevents.SelenideLogger;
-import helpers.Attach;
-import io.qameta.allure.selenide.AllureSelenide;
-import org.junit.jupiter.api.*;
-import org.openqa.selenium.remote.DesiredCapabilities;
-
-import java.util.Map;
-
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.WebDriverConditions.url;
-import static com.codeborne.selenide.WebDriverConditions.urlContaining;
+import pages.docdoc.CitySelectionPage;
+import pages.docdoc.HomePage;
+import pages.docdoc.DoctorsPage;
+import pages.sberhealth.AnalysesPage;
+import models.City;
+import models.Doctor;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import static io.qameta.allure.Allure.step;
 
-public class SmokeTests {
+public class SmokeTests extends BaseTest {
 
-    private static final String SELENOID_URL = System.getProperty("selenoid.url");
-    private static final String SELENOID_LOGIN = System.getProperty("selenoid.login");;
-    private static final String SELENOID_PASSWORD = System.getProperty("selenoid.password");
-
-    @BeforeAll
-    static void beforeAll() {
-        Configuration.browserSize = "1920x1080";
-        Configuration.pageLoadStrategy = "eager";
-        Configuration.remote = "https://" + SELENOID_LOGIN + ":" + SELENOID_PASSWORD + "@" + SELENOID_URL + "/wd/hub";
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", true,
-                "enableVideo", true
-        ));
-        Configuration.browserCapabilities = capabilities;
-    }
-
-    @BeforeEach
-    void beforeEach() {
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-    }
-
-    @AfterEach
-    void addAttachments() {
-        Attach.screenshotAs("Last screenshot");
-        Attach.pageSource();
-        Attach.browserConsoleLogs();
-        Attach.addVideo();
-    }
+    private final HomePage homePage = new HomePage();
+    private final DoctorsPage doctorsPage = new DoctorsPage();
+    private final AnalysesPage analysesPage = new AnalysesPage();
 
     @Test
     @DisplayName("Проверяем наличие баннера с cookies")
     void cookiesBannerShouldBeVisibleTest() {
-        step("Открываем сайт https://docdoc.ru/", () -> {
-            open("https://docdoc.ru/");
-        });
-
-        step("Проверяем, что отображается баннер cookies с data-test-id='cookies-banner'", () -> {
-            $("div[data-test-id='cookies-banner']")
-                    .shouldBe(visible);
+        step("Открываем главную страницу и проверяем баннер cookies", () -> {
+            homePage.openHomePage()
+                    .verifyCookiesBannerVisible();
         });
     }
 
     @Test
-    @DisplayName("Проверяем, что при выборе Санкт-Петербурга подгружаются соответствующие станции метро")
+    @DisplayName("Проверяем выбор города и станции метро")
     void selectCityAndVerifySubwayStationTest() {
-        step("Открываем главную страницу", () -> {
-            open("https://docdoc.ru/");
+        City saintPetersburg = City.saintPetersburg();
+        CitySelectionPage citySelectionPage = step("Открываем главную страницу", () -> {
+            return homePage.openHomePage()
+                    .clickCitySelectButton();
         });
-        step("Нажимаем на выбор города", () -> {
-            $("[data-test-id='city-select-button']")
-                    .shouldBe(visible)
-                    .click();
+        step("Выбираем город Санкт-Петербург и проверяем, что открылась страница для Петербурга", () -> {
+            citySelectionPage.selectCity(saintPetersburg)
+                    .verifyPageUrl(saintPetersburg.getUrl());
         });
-        step("Выбираем Санкт-Петербург", () -> {
-            $$("span").findBy(text("Санкт-Петербург"))
-                    .shouldBe(visible)
-                    .click();
-        });
-        step("Проверяем открытие нужной страницы города", () -> {
-            webdriver().shouldHave(url("https://spb.docdoc.ru/"));
-        });
-        step("Нажимаем на поле поиска метро/района/города", () -> {
-            $("[data-test-id='search_geo_input']")
-                    .shouldBe(visible)
-                    .click();
-        });
-        step("Проверяем наличие станции метро 'Автово'", () -> {
-            $$("[data-test-id='search_geo_items']")
-                    .findBy(text("Автово"))
-                    .shouldBe(visible);
+        step("Нажимаем на поле поиска метро/района/города и проверяем наличие станции Автово", () -> {
+            citySelectionPage.clickSearchGeoInput()
+                    .verifySubwayStationVisible("Автово");
         });
     }
 
     @Test
-    @DisplayName("Проверяем, что по иконке категории открывается нужная категория врачей")
+    @DisplayName("Проверяем переход по специальности врача")
     void verifyDoctorTypeTest() {
-        step("Открываем главную страницу", () -> {
-            open("https://docdoc.ru/doctor");
-        });
-        step("Выбираем специальность 'Гастроэнтеролог'", () -> {
-            $("img[alt='Гастроэнтеролог']")
-                    .click();
-        });
-        step("Проверяем, что открылась нужная страница", () -> {
-            webdriver().shouldHave(urlContaining("gastroenterolog"));
-            $("[data-testid='top_content_seo']")
-                    .shouldBe(visible)
-                    .$("h1")
-                    .shouldHave(text("Гастроэнтерологи"));
+        step("Проверяем открытие страницы гастроэнтеролога", () -> {
+            Doctor.Specialty specialty = Doctor.Specialty.GASTROENTEROLOGIST;
+            doctorsPage.openDoctorsPage()
+                    .selectDoctorSpecialty(specialty)
+                    .verifySpecialtyPageOpened(specialty.getUrlPart(), specialty.getPageTitle());
         });
     }
 
     @Test
-    @DisplayName("Проверяем, что по фильтру 'Детские врачи' со страницы скрываются врачи для взрослых")
+    @DisplayName("Проверяем фильтр детских врачей")
     void verifyKidsFilterTest() {
-        step("Открываем главную страницу", () -> {
-            open("https://docdoc.ru/doctor");
-        });
-        step("Включаем фильтр по детским врачам", () -> {
-            $("#kidsReceptionSearch")
-                    .sibling(0)
-                    .click();
-        });
-        step("Проверяем, что врачи для взрослых скрыты со страницы", () -> {
-            $("[data-testid='popular-specialties__adult']").shouldNotBe(visible);
+        step("Включаем фильтр детских врачей и проверяем скрытие взрослых", () -> {
+            doctorsPage.openDoctorsPage()
+                    .enableKidsFilter()
+                    .verifyAdultDoctorsHidden();
         });
     }
 
-        @Test
-        @DisplayName("Проверяем работу счётчика в корзине")
-        void verifyAddingAnalysesToCart() {
-            step("Открываем главную страницу заказа анализов", () -> {
-                open("https://lk.sberhealth.ru/laboratory-analyses");
-            });
-            step("Добавляем в корзину первый анализ в списке", () -> {
-                $$("button[data-testid='analysis-detail-card-add-desktop']")
-                        .first()
-                        .shouldBe(visible)
-                        .click();
-            });
-            step("Проверяем, что счётчик в корзине стал равен '1'", () -> {
-                $("[data-testid='cart-counter']")
-                        .shouldBe(visible)
-                        .shouldHave(text("1"));
-            });
-        }
+    @Test
+    @DisplayName("Проверяем работу счётчика в корзине")
+    void verifyAddingAnalysesToCart() {
+        step("Открываем главную страницу заказа анализов", () -> {
+            analysesPage.openAnalysesPage();
+        });
+        step("Добавляем в корзину первый анализ в списке", () -> {
+            analysesPage.addFirstAnalysisToCart();
+        });
+        step("Проверяем, что счётчик в корзине стал равен '1'", () -> {
+            analysesPage.verifyCartCounterEquals("1");
+        });
     }
-
-
-
-
-
+}
