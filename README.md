@@ -33,7 +33,9 @@
 - ✓ *Проверка появления счётчика товаров в корзине при добавлении анализов в корзину*
 
 ---
-### ![Jenkins](https://img.icons8.com/?size=30&id=39292&format=png&color=000000) Сборка в [Jenkins](https://jenkins.autotests.cloud/job/C35-lansm_t-Unit14-test_build_for_healthcompany/)
+<h3 id="jenkins-build"> 
+  <img src="https://img.icons8.com/?size=30&id=39292&format=png&color=000000"> Сборка в <a href="https://jenkins.autotests.cloud/job/C35-lansm_t-Unit14-test_build_for_healthcompany/">Jenkins</a>
+</h3>
 
 ---
 ### Параметры сборки в Jenkins:
