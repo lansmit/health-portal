@@ -6,7 +6,7 @@
 - [Примеры автоматизированных тест-кейсов](#примеры-автоматизированных-тест-кейсов)
 - [Сборка в Jenkins](#jenkins-build)
 - [Запуск из терминала](#команды-для-запуска-из-терминала)
-- [Allure отчет](#allure-отчет)
+- [Allure отчет](#allure-report)
 - [Уведомление в Telegram при помощи бота](#уведомление-в-telegram-при-помощи-бота)
 ---
 ### Технологии и инструменты:
@@ -69,7 +69,10 @@ clean test
 "-Dbrowser.size=${BROWSER_SIZE}"
 ```
 ---
-### Allure [отчёт](https://jenkins.autotests.cloud/job/C35-lansm_t-Unit14-test_build_for_sberhealth/allure/)
+<h3 id="allure-report">
+  <img src="https://img.icons8.com/?size=30&id=39292&format=png&color=000000">
+  Allure <a href="https://jenkins.autotests.cloud/job/C35-lansm_t-Unit14-test_build_for_sberhealth/allure/">отчёт</a>
+</h3>
 
 ***Тест-кейсы***
 
