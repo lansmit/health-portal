@@ -38,11 +38,11 @@
 </h3>
 ---
 ### Параметры сборки в Jenkins:
-- *browser (браузер, по умолчанию chrome)*
-- *browserVersion (версия браузера, по умолчанию 128.0)*
-- *browserSize (размер окна браузера, по умолчанию 1920x1080)*
-- *selenoidLogin (логин удаленного сервера Selenoid)*
-- *selenoidPassword (пароль удаленного сервера Selenoid)*
+- **browser** (браузер, по умолчанию chrome)
+- **browserVersion** (версия браузера, по умолчанию 128.0)
+- **browserSize** (размер окна браузера, по умолчанию 1920x1080)
+- **selenoidLogin** (логин удаленного сервера Selenoid)
+- **selenoidPassword** (пароль удаленного сервера Selenoid)
 
 ---
 
