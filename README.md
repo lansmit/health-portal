@@ -37,7 +37,7 @@
   <img src="https://img.icons8.com/?size=30&id=39292&format=png&color=000000"> Сборка в <a href="https://jenkins.autotests.cloud/job/C35-lansm_t-Unit14-test_build_for_healthcompany/">Jenkins</a>
 </h3>
 ---
-### Параметры сборки в Jenkins:
+**Параметры сборки в Jenkins:**
 
 - **browser** (браузер, по умолчанию chrome)
 - **browserVersion** (версия браузера, по умолчанию 128.0)
