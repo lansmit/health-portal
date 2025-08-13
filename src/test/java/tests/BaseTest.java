@@ -1,6 +1,8 @@
 package tests;
 
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import com.codeborne.selenide.WebDriverRunner;
 import configuration.TestConfiguration;
 import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -22,9 +24,16 @@ public abstract class BaseTest {
 
     @AfterEach
     void addAttachments() {
-        Attach.screenshotAs("Last screenshot");
-        Attach.pageSource();
-        Attach.browserConsoleLogs();
-        Attach.addVideo();
+        if (WebDriverRunner.hasWebDriverStarted()) {
+            Attach.screenshotAs("Last screenshot");
+            Attach.pageSource();
+            Attach.browserConsoleLogs();
+            Attach.addVideo();
+        }
+    }
+
+    @AfterEach
+    void tearDown() {
+        Selenide.closeWebDriver();
     }
 }

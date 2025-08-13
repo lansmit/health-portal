@@ -17,12 +17,8 @@ public class City {
         return url;
     }
 
-    // Статические методы для создания часто используемых городов
     public static City saintPetersburg() {
         return new City("Санкт-Петербург", "https://spb.docdoc.ru/");
     }
 
-    public static City moscow() {
-        return new City("Москва", "https://docdoc.ru/");
-    }
 }
