@@ -45,6 +45,8 @@
 - **selenoidLogin** (логин удаленного сервера Selenoid)
 - **selenoidPassword** (пароль удаленного сервера Selenoid)
 
+![](src/media/jenkins.jpg)
+
 ---
 
 ### Команды для запуска из терминала
