@@ -18,11 +18,11 @@ public class DoctorsPage extends BasePage {
     private static final String TODAY_FILTER = "//span[contains(text(), 'Сегодня')]";
     private static final String APPLIED_FILTERS_BADGE = "[data-testid='badge-applied-filters-count']";
 
-        @Step("Открываем общую страницу врачей")
-        public DoctorsPage openDoctorsPage() {
-            openPage("https://docdoc.ru/doctor/");
-            return this;
-        }
+    @Step("Открываем общую страницу врачей")
+    public DoctorsPage openDoctorsPage() {
+        openPage("https://docdoc.ru/doctor/");
+        return this;
+    }
 
     @Step("Открываем страницу c неврологами")
     public DoctorsPage openNevrologPage() {

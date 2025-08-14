@@ -16,8 +16,16 @@ public class Doctor {
             this.pageTitle = pageTitle;
         }
 
-        public String getDisplayName() { return displayName; }
-        public String getUrlPart() { return urlPart; }
-        public String getPageTitle() { return pageTitle; }
+        public String getDisplayName() {
+            return displayName;
+        }
+
+        public String getUrlPart() {
+            return urlPart;
+        }
+
+        public String getPageTitle() {
+            return pageTitle;
+        }
     }
 }

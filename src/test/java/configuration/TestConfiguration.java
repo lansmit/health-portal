@@ -2,6 +2,7 @@ package configuration;
 
 import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
 import java.util.Map;
 
 public class TestConfiguration {

@@ -1,6 +1,7 @@
 package pages.base;
 
 import com.codeborne.selenide.SelenideElement;
+
 import static com.codeborne.selenide.Selenide.*;
 
 public abstract class BasePage {
