@@ -84,4 +84,6 @@ clean test
 ### Уведомление в Telegram при помощи бота
 ![](src/media/telegram.jpg)
 
-
+---
+### Видео запуска теста через Selenoid
+![](src/media/health.gif)
