@@ -76,10 +76,10 @@ clean test
 
 ***Тест-кейсы***
 
-![](src/test/resources/images/allure.jpg)
+![](src/media/allure.jpg)
 
 ---
 ### Уведомление в Telegram при помощи бота
-![](src/test/resources/images/telegram.jpg)
+![](src/media/telegram.jpg)
 
 
