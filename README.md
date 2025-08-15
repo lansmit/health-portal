@@ -73,7 +73,7 @@ clean test
 ---
 <h3 id="allure-report">
   <img src="https://img.icons8.com/?size=30&id=39292&format=png&color=000000">
-  Allure <a href="https://jenkins.autotests.cloud/job/C35-lansm_t-Unit14-test_build_for_sberhealth/allure/">отчёт</a>
+  Allure <a href="https://jenkins.autotests.cloud/job/C35-lansm_t-Unit14-test_build_for_healthcompany/allure">отчёт</a>
 </h3>
 
 ***Тест-кейсы***
