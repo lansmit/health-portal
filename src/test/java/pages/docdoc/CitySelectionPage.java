@@ -2,8 +2,7 @@ package pages.docdoc;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$$;
-import static com.codeborne.selenide.Selenide.webdriver;
+import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverConditions.url;
 
 import io.qameta.allure.Step;
@@ -14,8 +13,9 @@ import java.time.Duration;
 
 public class CitySelectionPage extends BasePage {
 
-    private static final String SEARCH_GEO_INPUT = "[data-test-id='search_geo_input']";
-    private static final String SEARCH_GEO_ITEMS = "[data-test-id='search_geo_items']";
+    private static final String SEARCH_GEO_INPUT = "[data-testid='search-form__location-field']";
+    private static final String ELEMENT_BY_TEXT = "//*[contains(normalize-space(text()), '%s')]";
+    private static final String TO_DOCTOR_LINK = "a[href='/doctor']";
 
     @Step("Проверяем URL страницы: {expectedUrl}")
     public CitySelectionPage verifyPageUrl(String expectedUrl) {
@@ -25,16 +25,21 @@ public class CitySelectionPage extends BasePage {
 
     @Step("Нажимаем на поле поиска метро/района/города")
     public CitySelectionPage clickSearchGeoInput() {
-        element(SEARCH_GEO_INPUT)
+        $(TO_DOCTOR_LINK)
                 .shouldBe(visible, Duration.ofSeconds(30))
                 .click();
+                switchTo().window(1);
+
+        $(SEARCH_GEO_INPUT)
+                .shouldBe(visible, Duration.ofSeconds(30))
+                .click();
+
         return this;
     }
 
-    @Step("Проверяем наличие станции метро: {stationName}")
-    public CitySelectionPage verifySubwayStationVisible(String stationName) {
-        $$(SEARCH_GEO_ITEMS)
-                .findBy(text(stationName))
+    @Step("Проверяем наличие элемента с текстом: {text}")
+    public CitySelectionPage verifyElementWithTextVisible(String text) {
+        $x(String.format(ELEMENT_BY_TEXT, text))
                 .shouldBe(visible);
         return this;
     }
@@ -55,6 +60,6 @@ public class CitySelectionPage extends BasePage {
 
     @Step("Нажимаем на поле поиска метро/района/города и проверяем наличие станции {stationName}")
     public CitySelectionPage clickSearchGeoInputAndVerifyStation(String stationName) {
-        return clickSearchGeoInput().verifySubwayStationVisible(stationName);
+        return clickSearchGeoInput().verifyElementWithTextVisible(stationName);
     }
 }
