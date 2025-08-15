@@ -10,6 +10,8 @@ import io.qameta.allure.Step;
 import models.City;
 import pages.base.BasePage;
 
+import java.time.Duration;
+
 public class CitySelectionPage extends BasePage {
 
     private static final String SEARCH_GEO_INPUT = "[data-test-id='search_geo_input']";
@@ -24,7 +26,7 @@ public class CitySelectionPage extends BasePage {
     @Step("Нажимаем на поле поиска метро/района/города")
     public CitySelectionPage clickSearchGeoInput() {
         element(SEARCH_GEO_INPUT)
-                .shouldBe(visible)
+                .shouldBe(visible, Duration.ofSeconds(30))
                 .click();
         return this;
     }
@@ -41,7 +43,7 @@ public class CitySelectionPage extends BasePage {
     public CitySelectionPage selectCity(City city) {
         $$("span")
                 .findBy(text(city.getName()))
-                .shouldBe(visible)
+                .shouldBe(visible, Duration.ofSeconds(20))
                 .click();
         return this;
     }

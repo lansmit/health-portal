@@ -1,6 +1,7 @@
 package pages.docdoc;
 
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
 import com.codeborne.selenide.SelenideElement;
@@ -8,9 +9,12 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import pages.base.BasePage;
 
+import java.time.Duration;
+
 public class HomePage extends BasePage {
 
     private static final String COOKIES_BANNER = "div[data-test-id='cookies-banner']";
+    private static final String HEADER_LOGO_IMG = "img[data-test-id='adaptive-header__logo-image']";
     private static final String CITY_SELECT_BUTTON = "[data-test-id='city-select-button']";
     private static final String PROMO_CODE_BUTTON = "//button[@class='the-button the-button--type-primary the-button--size-small' and contains(text(), 'Промокод')]";
     private static final String APPLY_BUTTON = "//button[contains(@class, 'PromoCodeModal__button') and contains(text(), 'Применить')]";
@@ -19,6 +23,7 @@ public class HomePage extends BasePage {
     @Step("Открываем главную страницу")
     public HomePage openHomePage() {
         openPage("https://docdoc.ru/");
+        $(HEADER_LOGO_IMG).shouldBe(visible, Duration.ofSeconds(30));
         return this;
     }
 
@@ -35,7 +40,7 @@ public class HomePage extends BasePage {
     @Step("Нажимаем на кнопку выбора города")
     public CitySelectionPage clickCitySelectButton() {
         element(CITY_SELECT_BUTTON)
-                .shouldBe(visible)
+                .shouldBe(visible, Duration.ofSeconds(30))
                 .click();
         return new CitySelectionPage();
     }
