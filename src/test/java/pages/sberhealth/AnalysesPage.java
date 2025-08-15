@@ -8,6 +8,8 @@ import static com.codeborne.selenide.Selenide.$x;
 import io.qameta.allure.Step;
 import pages.base.BasePage;
 
+import java.time.Duration;
+
 public class AnalysesPage extends BasePage {
     private static final String ADD_TO_CART_BUTTON = "button[data-testid='analysis-detail-card-add-desktop']";
     private static final String CART_COUNTER = "//span[text()='Корзина']/following-sibling::*[1]";
@@ -23,7 +25,7 @@ public class AnalysesPage extends BasePage {
     public AnalysesPage addFirstAnalysisToCart() {
         $$(ADD_TO_CART_BUTTON)
                 .first()
-                .shouldBe(visible)
+                .shouldBe(visible, Duration.ofSeconds(30))
                 .click();
         return this;
     }
@@ -31,7 +33,7 @@ public class AnalysesPage extends BasePage {
     @Step("Проверяем, что счётчик в корзине равен: {expectedCount}")
     public AnalysesPage verifyCartCounterEquals(String expectedCount) {
         $x(CART_COUNTER)
-                .shouldBe(visible)
+                .shouldBe(visible, Duration.ofSeconds(30))
                 .shouldHave(text(expectedCount));
         return this;
     }

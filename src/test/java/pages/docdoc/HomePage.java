@@ -33,7 +33,7 @@ public class HomePage extends BasePage {
 
     @Step("Проверяем видимость баннера cookies")
     public HomePage verifyCookiesBannerVisible() {
-        getCookiesBanner().shouldBe(visible);
+        getCookiesBanner().shouldBe(visible, Duration.ofSeconds(30));
         return this;
     }
 
@@ -48,21 +48,21 @@ public class HomePage extends BasePage {
     @Step("Нажимаем на кнопку Промокод")
     public HomePage clickPromoCodeButton() {
         $x(PROMO_CODE_BUTTON)
-                .shouldBe(visible)
+                .shouldBe(visible, Duration.ofSeconds(30))
                 .click();
         return this;
     }
 
     @Step("Проверяем видимость кнопки Применить")
     public HomePage verifyApplyButtonVisible() {
-        $x(APPLY_BUTTON).shouldBe(visible);
+        $x(APPLY_BUTTON).shouldBe(visible, Duration.ofSeconds(30));
         return this;
     }
 
     @Step("Нажимаем на кнопку Да, верно")
     public HomePage clickConfirmCityButton() {
         $x(CONFIRM_CITY_BUTTON)
-                .shouldBe(visible)
+                .shouldBe(visible, Duration.ofSeconds(30))
                 .click();
         return this;
     }

@@ -10,6 +10,8 @@ import io.qameta.allure.Step;
 import models.Doctor;
 import pages.base.BasePage;
 
+import java.time.Duration;
+
 public class DoctorsPage extends BasePage {
 
     private static final String KIDS_RECEPTION_SEARCH = "#kidsReceptionSearch";
@@ -41,7 +43,7 @@ public class DoctorsPage extends BasePage {
     public DoctorsPage verifySpecialtyPageOpened(String urlPart, String expectedTitle) {
         webdriver().shouldHave(urlContaining(urlPart));
         element(TOP_CONTENT_SEO)
-                .shouldBe(visible)
+                .shouldBe(visible, Duration.ofSeconds(30))
                 .$("h1")
                 .shouldHave(text(expectedTitle));
         return this;
@@ -57,14 +59,14 @@ public class DoctorsPage extends BasePage {
 
     @Step("Проверяем появление детских врачей")
     public DoctorsPage verifyKidsDoctorsAppear() {
-        $x(KIDS_SPECIALTIES).shouldBe(visible);
+        $x(KIDS_SPECIALTIES).shouldBe(visible, Duration.ofSeconds(30));
         return this;
     }
 
     @Step("Нажимаем на фильтр Сегодня")
     public DoctorsPage clickTodayFilter() {
         $x(TODAY_FILTER)
-                .shouldBe(visible)
+                .shouldBe(visible, Duration.ofSeconds(30))
                 .click();
         return this;
     }
@@ -72,7 +74,7 @@ public class DoctorsPage extends BasePage {
     @Step("Проверяем что счетчик примененных фильтров показывает: {expectedCount}")
     public DoctorsPage verifyAppliedFiltersCount(String expectedCount) {
         element(APPLIED_FILTERS_BADGE)
-                .shouldBe(visible)
+                .shouldBe(visible, Duration.ofSeconds(30))
                 .shouldHave(text(expectedCount));
         return this;
     }

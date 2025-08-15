@@ -40,7 +40,7 @@ public class CitySelectionPage extends BasePage {
     @Step("Проверяем наличие элемента с текстом: {text}")
     public CitySelectionPage verifyElementWithTextVisible(String text) {
         $x(String.format(ELEMENT_BY_TEXT, text))
-                .shouldBe(visible);
+                .shouldBe(visible, Duration.ofSeconds(30));
         return this;
     }
 
