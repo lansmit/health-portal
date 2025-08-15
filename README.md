@@ -45,7 +45,7 @@
 - **selenoidLogin** (логин удаленного сервера Selenoid)
 - **selenoidPassword** (пароль удаленного сервера Selenoid)
 
-![](src/media/jenkins.jpg)
+![](media/jenkins.jpg)
 
 ---
 
@@ -78,12 +78,12 @@ clean test
 
 ***Тест-кейсы***
 
-![](src/media/allure.jpg)
+![](media/allure.jpg)
 
 ---
 ### Уведомление в Telegram при помощи бота
-![](src/media/telegram.jpg)
+![](media/telegram.jpg)
 
 ---
 ### Видео запуска теста через Selenoid
-![](src/media/health.gif)
+![](media/health.gif)
