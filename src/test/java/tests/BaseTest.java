@@ -27,16 +27,11 @@ public abstract class BaseTest {
 
     @AfterEach
     void addAttachments() {
-        if (WebDriverRunner.hasWebDriverStarted()) {
-            Attach.screenshotAs("Last screenshot");
-            Attach.pageSource();
-            Attach.browserConsoleLogs();
-            Attach.addVideo();
-        }
-    }
-
-    @AfterEach
-    void tearDown() {
+        Attach.screenshotAs("Last screenshot");
+        Attach.pageSource();
+        Attach.browserConsoleLogs();
+        Attach.addVideo();
         Selenide.closeWebDriver();
     }
+
 }
